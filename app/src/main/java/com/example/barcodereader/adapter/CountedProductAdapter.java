@@ -11,17 +11,17 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.barcodereader.R;
-import com.example.barcodereader.room.model.Product;
+import com.example.barcodereader.room.model.CountedProduct;
 
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+public class CountedProductAdapter extends RecyclerView.Adapter<CountedProductAdapter.ViewHolder> {
 
-    private List<Product> userList;
+    private List<CountedProduct> userList;
     private Context context;
     private OnClickCallBack onClickCallBack;
 
-    public ProductAdapter(List<Product> userList, Context context) {
+    public CountedProductAdapter(List<CountedProduct> userList, Context context) {
         this.userList = userList;
         this.context = context;
     }
@@ -31,7 +31,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public interface OnClickCallBack {
-        void onItemClick(Product p, int position);
+        void onItemClick(CountedProduct p, int position);
     }
 
     @NonNull
@@ -42,9 +42,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product product = userList.get(position);
+        CountedProduct product = userList.get(position);
         holder.productName.setText(product.getProduct());
-        holder.tvProductCount.setText("0");
+        holder.tvProductCount.setText("" + product.getCountedQuantity());
 
         holder.btnEditProduct.setOnClickListener(v -> {
             onClickCallBack.onItemClick(product, position);

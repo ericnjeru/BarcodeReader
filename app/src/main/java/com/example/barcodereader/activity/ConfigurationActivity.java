@@ -1,4 +1,4 @@
-package com.example.barcodereader;
+package com.example.barcodereader.activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.example.barcodereader.R;
 import com.example.barcodereader.databinding.ActivityConfigurationBinding;
 import com.example.barcodereader.retrofit.ApiService;
 import com.example.barcodereader.retrofit.response.ProductResponse;
@@ -22,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Configuration extends AppCompatActivity {
+public class ConfigurationActivity extends AppCompatActivity {
 
     private ActivityConfigurationBinding b;
     private AppExecutors appExecutors;
@@ -53,7 +54,7 @@ public class Configuration extends AppCompatActivity {
                     if (!response.body().getError()) {
                         Log.e(TAG, "onResponse: Products downloaded");
 
-                        Toast.makeText(Configuration.this, "Downloaded products", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ConfigurationActivity.this, "Downloaded products", Toast.LENGTH_SHORT).show();
 
                         List<Product> productList = new ArrayList<>(response.body().getProducts());
 
@@ -61,11 +62,11 @@ public class Configuration extends AppCompatActivity {
 
                     } else {
                         util.hideView(b.rlProgress, true);
-                        Toast.makeText(Configuration.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ConfigurationActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     util.hideView(b.rlProgress, true);
-                    Toast.makeText(Configuration.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigurationActivity.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -94,7 +95,7 @@ public class Configuration extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 util.hideView(b.rlProgress, true);
-                Toast.makeText(Configuration.this, "Operation completed successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConfigurationActivity.this, "Operation completed successfully!", Toast.LENGTH_SHORT).show();
             });
         });
     }

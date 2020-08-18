@@ -1,22 +1,23 @@
-package com.example.barcodereader;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+package com.example.barcodereader.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
+import com.example.barcodereader.R;
 import com.example.barcodereader.databinding.ActivityQrModeBinding;
 
-import static com.example.barcodereader.QRCodeScanner.EXTRA_ADDRESS;
+import static com.example.barcodereader.activity.QRCodeScannerActivity.EXTRA_ADDRESS;
 
-public class QrMode extends AppCompatActivity  implements View.OnClickListener{
+public class QrModeActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityQrModeBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,7 @@ public class QrMode extends AppCompatActivity  implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.scan:
-                Intent i= new Intent(QrMode.this, QRCodeScanner.class);
+                Intent i = new Intent(QrModeActivity.this, QRCodeScannerActivity.class);
                 startActivityForResult(i, 1);
                 break;
         }

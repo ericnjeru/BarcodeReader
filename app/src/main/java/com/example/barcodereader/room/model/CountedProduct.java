@@ -6,8 +6,10 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 @Entity(tableName = "counted_products")
-public class CountedProduct {
+public class CountedProduct implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -19,7 +21,7 @@ public class CountedProduct {
     private String product;
     @SerializedName("counted_quantity")
     @Expose
-    private String countedQuantity;
+    private Integer countedQuantity;
     @SerializedName("identification_card")
     @Expose
     private String identificationCard;
@@ -29,9 +31,12 @@ public class CountedProduct {
     @SerializedName("branch_office")
     @Expose
     private String branchOffice;
+
+    private int product_id;
+
     @SerializedName("updated_at")
     @Expose
-    private Object updatedAt;
+    private String updatedAt;
 
     public Integer getId() {
         return id;
@@ -49,11 +54,11 @@ public class CountedProduct {
         this.product = product;
     }
 
-    public String getCountedQuantity() {
+    public Integer getCountedQuantity() {
         return countedQuantity;
     }
 
-    public void setCountedQuantity(String countedQuantity) {
+    public void setCountedQuantity(Integer countedQuantity) {
         this.countedQuantity = countedQuantity;
     }
 
@@ -81,11 +86,19 @@ public class CountedProduct {
         this.branchOffice = branchOffice;
     }
 
-    public Object getUpdatedAt() {
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
+    }
+
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Object updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 
