@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.barcodereader"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,10 @@ android {
     dataBinding {
         enabled = true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -40,7 +44,23 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
+    //Retrofit networking library
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
+    implementation("com.squareup.okhttp3:logging-interceptor:4.3.1")
 
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    //Room database
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
+    //QR code scanner
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
     implementation 'me.dm7.barcodescanner:zbar:1.9.13'
 }

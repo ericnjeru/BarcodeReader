@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BarcodeReader</string>
+    <string name="downloading_products">Downloading products...</string>
 </resources>
