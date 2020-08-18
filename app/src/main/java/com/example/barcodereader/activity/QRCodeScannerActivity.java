@@ -1,33 +1,34 @@
-package com.example.barcodereader;
+package com.example.barcodereader.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.Manifest.permission.CAMERA;
-public class QRCodeScanner extends AppCompatActivity implements ZXingScannerView.ResultHandler{
+
+public class QRCodeScannerActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private static final int REQUEST_CAMERA = 1;
     private ZXingScannerView mScannerView;
-    public static final String EXTRA_ADDRESS ="MESSAGE" ;
-    int sourceOfScanFlag=0;
-    String scanSourceText="";
+    public static final String EXTRA_ADDRESS = "MESSAGE";
+    int sourceOfScanFlag = 0;
+    String scanSourceText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
+        super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView );
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
@@ -63,7 +64,7 @@ public class QRCodeScanner extends AppCompatActivity implements ZXingScannerView
 
     private boolean CheckPermission(){
         boolean res;
-        res =(ContextCompat.checkSelfPermission( QRCodeScanner.this,CAMERA )==PackageManager.PERMISSION_GRANTED);
+        res = (ContextCompat.checkSelfPermission(QRCodeScannerActivity.this, CAMERA) == PackageManager.PERMISSION_GRANTED);
         return  res;
     }
     private void RequestPermission(){
@@ -79,10 +80,10 @@ public class QRCodeScanner extends AppCompatActivity implements ZXingScannerView
                     boolean cameraAccepted=grantResults[0]== PackageManager.PERMISSION_GRANTED;
                     if(cameraAccepted){
 
-                        Toast.makeText( QRCodeScanner.this,"Permission granted",Toast.LENGTH_LONG ).show();
+                        Toast.makeText(QRCodeScannerActivity.this, "Permission granted", Toast.LENGTH_LONG).show();
                     }else {
 
-                        Toast.makeText( QRCodeScanner.this,"Permission denied",Toast.LENGTH_LONG ).show();
+                        Toast.makeText(QRCodeScannerActivity.this, "Permission denied", Toast.LENGTH_LONG).show();
                         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
 
                             if(shouldShowRequestPermissionRationale( CAMERA )){
@@ -110,7 +111,7 @@ public class QRCodeScanner extends AppCompatActivity implements ZXingScannerView
 
     public void DisplayAlertMessage(String message, DialogInterface.OnClickListener listener){
 
-        new AlertDialog.Builder(  QRCodeScanner.this )
+        new AlertDialog.Builder(QRCodeScannerActivity.this)
                 .setMessage(message )
                 .setPositiveButton( "OK",listener )
                 .setNegativeButton( "Cancel",null )

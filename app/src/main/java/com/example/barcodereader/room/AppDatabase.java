@@ -6,13 +6,15 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.barcodereader.room.dao.CountedProductDao;
 import com.example.barcodereader.room.dao.ProductDao;
 import com.example.barcodereader.room.dao.UserDao;
+import com.example.barcodereader.room.model.CountedProduct;
 import com.example.barcodereader.room.model.Product;
 import com.example.barcodereader.room.model.User;
 
 /*Add all entities here*/
-@Database(entities = {User.class, Product.class}, exportSchema = false, version = 1)
+@Database(entities = {User.class, Product.class, CountedProduct.class}, exportSchema = false, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -33,5 +35,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
 
     public abstract ProductDao productDao();
+
+    public abstract CountedProductDao countedProductDao();
 
 }

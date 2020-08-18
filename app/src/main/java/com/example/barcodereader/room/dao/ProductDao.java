@@ -9,7 +9,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.barcodereader.room.model.Product;
-import com.example.barcodereader.room.model.User;
 
 import java.util.List;
 
@@ -18,7 +17,10 @@ import java.util.List;
 public interface ProductDao {
 
     @Query("SELECT * FROM products")
-    LiveData<List<User>> getAllProducts();
+    LiveData<List<Product>> getAllProducts();
+
+    @Query("SELECT * FROM products WHERE product LIKE :keyword")
+    LiveData<List<Product>> findProduct(String keyword);
 
     @Query("SELECT * FROM products WHERE bar_code=:barcode")
     LiveData<Product> getProductByBarCode(String barcode);
