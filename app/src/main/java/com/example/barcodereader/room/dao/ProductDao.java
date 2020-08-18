@@ -20,6 +20,9 @@ public interface ProductDao {
     @Query("SELECT * FROM products")
     LiveData<List<User>> getAllProducts();
 
+    @Query("SELECT * FROM products WHERE bar_code=:barcode")
+    LiveData<Product> getProductByBarCode(String barcode);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addProduct(Product product);
 
