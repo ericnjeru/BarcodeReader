@@ -1,4 +1,8 @@
 <resources>
-    <string name="app_name">BarcodeReader</string>
+    <string name="app_name">Avakus</string>
     <string name="downloading_products">Downloading products...</string>
+
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

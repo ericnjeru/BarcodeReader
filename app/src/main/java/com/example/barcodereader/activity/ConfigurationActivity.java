@@ -42,6 +42,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         service = util.getApiService();
 
         b.download.setOnClickListener(v -> downloadOnlineProducts());
+        b.backBtn.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
     }
 

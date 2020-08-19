@@ -37,9 +37,8 @@
                         android:id="@+id/back_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:layout_gravity="center"
+                        android:layout_gravity="start"
                         android:drawableStart="@drawable/ic_arrow_back"
-                        android:drawableLeft="@drawable/ic_arrow_back"
                         android:drawableTint="@color/grey_3"
                         android:gravity="center"
                         android:text="BACK"
@@ -48,7 +47,7 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/downlod"
+                        android:layout_toLeftOf="@+id/download"
                         android:text="GRABAR"
                         android:theme="@style/Button.White.Primary" />
 
@@ -57,7 +56,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:gravity="end"
                         android:text="DESCARGAR B.D."
                         android:theme="@style/Button.White.Primary" />
@@ -99,15 +97,15 @@
                         android:text="Id. Usuario:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/uuid"
+                        android:hint="233423"
+                        android:inputType="number"
                         android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:text="numeric"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/grey_60" />
+                        android:layout_marginRight="@dimen/spacing_large"/>
+
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -135,15 +133,14 @@
                         android:text="IP. Address Source:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/ip_source"
+                        android:hint="192.163.43.79"
+                        android:inputType="number"
                         android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:text="192.163.43.79"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/grey_60" />
+                        android:layout_marginRight="@dimen/spacing_large"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -171,15 +168,15 @@
                         android:text="IP. Address Destination"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/ip_destination"
+                        android:hint="220.155.42.1"
+                        android:inputType="number"
                         android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:text="220.155.42.1"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/grey_60" />
+                        android:layout_marginRight="@dimen/spacing_large"/>
+
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -206,16 +203,15 @@
                         android:layout_margin="@dimen/spacing_large"
                         android:text="Password"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/password"
+                        android:hint="passoword"
+                        android:inputType="textPassword"
                         android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"
-                        android:layout_marginBottom="@dimen/spacing_large"
-                        android:text="......."
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/grey_60" />
+                        android:layout_marginRight="@dimen/spacing_large"/>
+
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

@@ -22,10 +22,10 @@ public interface ProductDao {
     @Query("SELECT * FROM products WHERE product LIKE :keyword")
     LiveData<List<Product>> findProduct(String keyword);
 
-    @Query("SELECT * FROM products WHERE bar_code=:barcode")
-    LiveData<Product> getProductByBarCode(String barcode);
+    @Query("SELECT * FROM products WHERE barCode=:barcode")
+    Product getProductByBarCode(String barcode);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addProduct(Product product);
 
     @Delete

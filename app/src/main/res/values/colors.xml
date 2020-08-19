@@ -36,7 +36,6 @@
     <color name="grey_100_">#0d0d0d</color>
 
 
-
     <color name="red_50">#FFEBEE</color>
     <color name="red_100">#FFCDD2</color>
     <color name="red_200">#EF9A9A</color>
@@ -314,4 +313,6 @@
     <color name="grey_900">#212121</color>
     <color name="grey_1000">#1a1a1a</color>
     <color name="colorWhite">#ffffff</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

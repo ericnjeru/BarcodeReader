@@ -55,6 +55,11 @@ public class ConsultActivity extends AppCompatActivity {
             }
 
         });
+
+        b.backBtn.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
     }
 
     private void updateTotal() {

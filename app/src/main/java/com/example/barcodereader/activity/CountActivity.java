@@ -56,6 +56,11 @@ public class CountActivity extends AppCompatActivity {
 
         loadCountedProducts();
 
+        b.backBtn.setOnClickListener(v -> {
+            onBackPressed();
+        });
+
+
     }
 
 
