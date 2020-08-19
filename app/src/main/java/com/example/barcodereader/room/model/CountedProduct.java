@@ -34,6 +34,8 @@ public class CountedProduct implements Serializable {
 
     private int product_id;
 
+    private int uploaded = 0;
+
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
@@ -88,6 +90,14 @@ public class CountedProduct implements Serializable {
 
     public int getProduct_id() {
         return product_id;
+    }
+
+    public int getUploaded() {
+        return uploaded;
+    }
+
+    public void setUploaded(int uploaded) {
+        this.uploaded = uploaded;
     }
 
     public void setProduct_id(int product_id) {

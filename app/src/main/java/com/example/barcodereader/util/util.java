@@ -18,6 +18,7 @@ public class util {
 
     private static final String TAG = "util";
     public static final String BASE_URL = "http://192.168.43.121:8000/api/";
+    //public static final String BASE_URL = "http://barcode.favouredwarriors.com/api/";
 
     /*Instantiate retrofit API client*/
     public static ApiService getApiService() {

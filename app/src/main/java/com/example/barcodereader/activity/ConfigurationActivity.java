@@ -14,7 +14,10 @@ import com.example.barcodereader.retrofit.response.ProductResponse;
 import com.example.barcodereader.room.AppDatabase;
 import com.example.barcodereader.room.model.Product;
 import com.example.barcodereader.util.AppExecutors;
+import com.example.barcodereader.util.MyConnectivityManager;
 import com.example.barcodereader.util.util;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class ConfigurationActivity extends AppCompatActivity {
     private AppDatabase appDatabase;
     private ApiService service;
     private static final String TAG = "Configuration";
+    private MyConnectivityManager connectivityManager;
 
 
     @Override
@@ -40,8 +44,17 @@ public class ConfigurationActivity extends AppCompatActivity {
         appExecutors = AppExecutors.getInstance();
         appDatabase = AppDatabase.getInstance(this);
         service = util.getApiService();
+        connectivityManager = MyConnectivityManager.getInstance(this);
 
-        b.download.setOnClickListener(v -> downloadOnlineProducts());
+        b.download.setOnClickListener(v -> {
+
+            if (connectivityManager.isOnline()) {
+                downloadOnlineProducts();
+            } else {
+                Snackbar.make(b.appbar, "No Internet Connection", BaseTransientBottomBar.LENGTH_LONG).show();
+            }
+
+        });
         b.backBtn.setOnClickListener(v -> {
             onBackPressed();
         });

@@ -83,6 +83,7 @@ public class AddProductFragment extends BottomSheetDialogFragment {
                 if (TextUtils.isEmpty(keyword)) {
                     Toast.makeText(getContext(), "Please enter a search keyword", Toast.LENGTH_SHORT).show();
                 } else {
+                    keyword = "%" + keyword + "%";
                     performSearch(keyword);
                 }
                 return true;
@@ -97,6 +98,13 @@ public class AddProductFragment extends BottomSheetDialogFragment {
         b.searchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new ProductAdapter(searchResults, getContext());
         b.searchRecyclerView.setAdapter(adapter);
+        b.btClear.setOnClickListener(v -> {
+
+            if (b.etSearch.getText().toString().trim().equals(""))
+                dismiss();
+            else
+                b.etSearch.setText("");
+        });
 
         onClickCallBack = (p, position) -> {
 
@@ -117,10 +125,12 @@ public class AddProductFragment extends BottomSheetDialogFragment {
                 countedProduct.setIdentificationCard("");
                 countedProduct.setBusiness("");
                 countedProduct.setBranchOffice("");
+                countedProduct.setProduct_id(p.getId());
                 appDatabase.countedProductDao().addProduct(countedProduct);
             }
 
             Log.e(TAG, "onItemClick: " + position);
+            Log.e(TAG, "product id: " + countedProduct.getProduct_id());
             Intent intent = new Intent(getContext(), ConsultActivity.class);
             intent.putExtra("isNew", true);
             intent.putExtra("counted_product", countedProduct);
@@ -134,6 +144,7 @@ public class AddProductFragment extends BottomSheetDialogFragment {
         appExecutors.diskIO().execute(() -> {
 
             getActivity().runOnUiThread(() -> {
+
                 appDatabase.productDao().findProduct(keyword).observe(getActivity(), products -> {
                     searchResults.clear();
                     searchResults.addAll(products);

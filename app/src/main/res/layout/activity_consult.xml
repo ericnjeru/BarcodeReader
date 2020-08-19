@@ -53,7 +53,8 @@
                         android:layout_alignParentRight="true"
                         android:gravity="end"
                         android:text="ENVIAR a BASEDE DATOS"
-                        android:theme="@style/Button.White.Primary" />
+                        android:theme="@style/Button.White.Primary"
+                        android:visibility="gone" />
 
                 </RelativeLayout>
 
