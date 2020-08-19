@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(consult);
         });
         binding.qrmode.setOnClickListener(v -> {
-            Intent qrmode = new Intent(MainActivity.this, QrModeActivity.class);
+            Intent qrmode = new Intent(MainActivity.this, CountActivity.class);
             startActivity(qrmode);
         });
         binding.count.setOnClickListener(v -> {

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -50,15 +49,13 @@ public class QrModeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-
+            if (resultCode == Activity.RESULT_OK) {
                 try {
-
-                    Product product1 = getProductByBarCode(EXTRA_ADDRESS);
-                    if (product1 != null){
+                    Product product1 = getProductByBarCode(data.getStringExtra(EXTRA_ADDRESS));
+                    if (product1 != null) {
                         findOrFail(product1);
                         binding.scanResult.setText(data.getStringExtra(EXTRA_ADDRESS));
-                    }else {
+                    } else {
                         Toast.makeText(QrModeActivity.this, "Product Not found!", Toast.LENGTH_LONG).show();
                         binding.scanResult.setText("Product Not found!");
                     }
@@ -75,10 +72,10 @@ public class QrModeActivity extends AppCompatActivity {
         }
     }
 
-    private Product getProductByBarCode(String barcode){
+    private Product getProductByBarCode(String barcode) {
         appExecutors.diskIO().execute(() -> {
-             searchproduct = appDatabase.productDao().getProductByBarCode(barcode);
-            Log.e(TAG, "getProductByBarCode: "+searchproduct );
+            searchproduct = appDatabase.productDao().getProductByBarCode(barcode);
+            Log.e(TAG, "getProductByBarCode: " + searchproduct);
         });
         return searchproduct;
     }
@@ -101,6 +98,7 @@ public class QrModeActivity extends AppCompatActivity {
             intent.putExtra("isNew", true);
             intent.putExtra("counted_product", countedProduct);
             startActivity(intent);
+            finish();
         });
     }
 }

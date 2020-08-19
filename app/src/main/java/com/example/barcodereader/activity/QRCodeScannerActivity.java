@@ -30,12 +30,12 @@ public class QRCodeScannerActivity extends AppCompatActivity implements ZXingSca
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);
-        setContentView(mScannerView );
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            if(CheckPermission()){
+        setContentView(mScannerView);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (CheckPermission()) {
 
 //                Toast.makeText( QRCodeScanner.this,"Permision granted",Toast.LENGTH_LONG ).show();
-            }else {
+            } else {
 
                 RequestPermission();
             }
@@ -43,16 +43,17 @@ public class QRCodeScannerActivity extends AppCompatActivity implements ZXingSca
         }
 
     }
+
     @Override
     public void handleResult(Result result) {
-        final String scanResult=result.getText();
+        final String scanResult = result.getText();
 
 
         Intent i = new Intent();
         Bundle extras = new Bundle();
         extras.putString(EXTRA_ADDRESS, scanResult.toString());
         i.putExtras(extras);
-        setResult(Activity.RESULT_OK,i);
+        setResult(Activity.RESULT_OK, i);
         finish();
 
     }
@@ -62,41 +63,43 @@ public class QRCodeScannerActivity extends AppCompatActivity implements ZXingSca
 
     }
 
-    private boolean CheckPermission(){
+    private boolean CheckPermission() {
         boolean res;
         res = (ContextCompat.checkSelfPermission(QRCodeScannerActivity.this, CAMERA) == PackageManager.PERMISSION_GRANTED);
-        return  res;
+        return res;
     }
-    private void RequestPermission(){
 
-        ActivityCompat.requestPermissions( this,new String[]{CAMERA},REQUEST_CAMERA );
+    private void RequestPermission() {
+
+        ActivityCompat.requestPermissions(this, new String[]{CAMERA}, REQUEST_CAMERA);
     }
-    public void onRequestPermissionsResult(int requestCode, String permission[],int grantResults[]){
 
-        switch (requestCode){
+    public void onRequestPermissionsResult(int requestCode, String permission[], int grantResults[]) {
+
+        switch (requestCode) {
 
             case REQUEST_CAMERA:
-                if(grantResults.length>0){
-                    boolean cameraAccepted=grantResults[0]== PackageManager.PERMISSION_GRANTED;
-                    if(cameraAccepted){
+                if (grantResults.length > 0) {
+                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    if (cameraAccepted) {
 
                         Toast.makeText(QRCodeScannerActivity.this, "Permission granted", Toast.LENGTH_LONG).show();
-                    }else {
+                    } else {
 
                         Toast.makeText(QRCodeScannerActivity.this, "Permission denied", Toast.LENGTH_LONG).show();
-                        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-                            if(shouldShowRequestPermissionRationale( CAMERA )){
+                            if (shouldShowRequestPermissionRationale(CAMERA)) {
 
-                                DisplayAlertMessage( "You need to allow permissions",
+                                DisplayAlertMessage("You need to allow permissions",
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-                                                    requestPermissions( new String[]{CAMERA},REQUEST_CAMERA );
+                                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                    requestPermissions(new String[]{CAMERA}, REQUEST_CAMERA);
                                                 }
                                             }
-                                        } );
+                                        });
                                 return;
                             }
                         }
@@ -109,32 +112,32 @@ public class QRCodeScannerActivity extends AppCompatActivity implements ZXingSca
 
     }
 
-    public void DisplayAlertMessage(String message, DialogInterface.OnClickListener listener){
+    public void DisplayAlertMessage(String message, DialogInterface.OnClickListener listener) {
 
         new AlertDialog.Builder(QRCodeScannerActivity.this)
-                .setMessage(message )
-                .setPositiveButton( "OK",listener )
-                .setNegativeButton( "Cancel",null )
+                .setMessage(message)
+                .setPositiveButton("OK", listener)
+                .setNegativeButton("Cancel", null)
                 .create().show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            if(CheckPermission()){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (CheckPermission()) {
 
-                if(mScannerView == null){
+                if (mScannerView == null) {
 
-                    mScannerView=new ZXingScannerView( this );
-                    setContentView( mScannerView );
+                    mScannerView = new ZXingScannerView(this);
+                    setContentView(mScannerView);
 
                 }
-                mScannerView.setResultHandler( this );
+                mScannerView.setResultHandler(this);
                 mScannerView.startCamera();
                 mScannerView.resumeCameraPreview(this);
 
-            }else {
+            } else {
 
                 RequestPermission();
             }

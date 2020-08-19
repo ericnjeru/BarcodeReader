@@ -16,7 +16,7 @@ import java.util.List;
 @Dao
 public interface CountedProductDao {
 
-    @Query("SELECT * FROM counted_products")
+    @Query("SELECT * FROM counted_products WHERE uploaded=0")
     LiveData<List<CountedProduct>> getAllCountedProducts();
 
     @Query("SELECT * FROM counted_products WHERE product_id=:product_id")
@@ -30,5 +30,12 @@ public interface CountedProductDao {
 
     @Update
     void updateProduct(CountedProduct product);
+
+    @Query("UPDATE counted_products SET countedQuantity=:total WHERE product_id=:product_id")
+    void updateSingleProducs(int total, int product_id);
+
+
+    @Query("UPDATE counted_products SET uploaded=:is_uploaded WHERE product_id=:product_id")
+    void setProductIsUploaded(int is_uploaded, int product_id);
 
 }

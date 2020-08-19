@@ -1,34 +1,43 @@
 package com.example.barcodereader.util;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-public class CheckConnectivity {
+public class MyConnectivityManager {
 
-    /*Activity context*/
-    Context context;
-
-    /*Log TAG*/
+    private static MyConnectivityManager instance;
+    private Context context;
     private static final String TAG = "CheckConnectivity";
+
+    public MyConnectivityManager(Context context) {
+        this.context = context;
+    }
+
+    public static synchronized MyConnectivityManager getInstance(Context context) {
+        if (instance == null) {
+            instance = new MyConnectivityManager(context);
+        }
+        return instance;
+    }
+
 
     /*
      * TODO: Required permission android.permission.ACCESS_NETWORK_STATE
      * Check if network is connected: Mobile Data or WiFi*/
 
     private boolean checkNetworkAvailability() {
-        ConnectivityManager connMgr =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.ConnectivityManager connMgr =
+                (android.net.ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean isWifiConn = false;
         boolean isMobileConn = false;
         for (Network network : connMgr.getAllNetworks()) {
             NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
-            if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+            if (networkInfo.getType() == android.net.ConnectivityManager.TYPE_WIFI) {
                 isWifiConn |= networkInfo.isConnected();
             }
-            if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+            if (networkInfo.getType() == android.net.ConnectivityManager.TYPE_MOBILE) {
                 isMobileConn |= networkInfo.isConnected();
             }
         }
@@ -41,9 +50,9 @@ public class CheckConnectivity {
 
     /*Check if can actually connect to the internet*/
     public boolean isOnline() {
-        ConnectivityManager connMgr = (ConnectivityManager)
+        android.net.ConnectivityManager connMgr = (android.net.ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        return (networkInfo != null && networkInfo.isConnected());
+        return (networkInfo != null && networkInfo.isConnected() && checkNetworkAvailability());
     }
 }
