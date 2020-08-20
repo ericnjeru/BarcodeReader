@@ -1,8 +1,10 @@
 package com.example.barcodereader.util;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.util.Log;
 
 public class MyConnectivityManager {
@@ -28,17 +30,30 @@ public class MyConnectivityManager {
      * Check if network is connected: Mobile Data or WiFi*/
 
     private boolean checkNetworkAvailability() {
-        android.net.ConnectivityManager connMgr =
-                (android.net.ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean isWifiConn = false;
         boolean isMobileConn = false;
-        for (Network network : connMgr.getAllNetworks()) {
-            NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
-            if (networkInfo.getType() == android.net.ConnectivityManager.TYPE_WIFI) {
-                isWifiConn |= networkInfo.isConnected();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            for (Network network : connMgr.getAllNetworks()) {
+                NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
+                if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                    isWifiConn |= networkInfo.isConnected();
+                }
+                if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                    isMobileConn |= networkInfo.isConnected();
+                }
             }
-            if (networkInfo.getType() == android.net.ConnectivityManager.TYPE_MOBILE) {
-                isMobileConn |= networkInfo.isConnected();
+        }else {
+            NetworkInfo activeNetwork = connMgr.getActiveNetworkInfo();
+
+            if (activeNetwork != null) {
+                // connected to the internet
+                if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                    isWifiConn = activeNetwork.isConnected();
+                } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                    isMobileConn = activeNetwork.isConnected();
+                }
             }
         }
         Log.d(TAG, "Wifi connected: " + isWifiConn);

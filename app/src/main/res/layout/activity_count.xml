@@ -34,18 +34,14 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
-
-                    <TextView
+                    <ImageView
                         android:id="@+id/back_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:drawableStart="@drawable/ic_arrow_back"
-                        android:drawableLeft="@drawable/ic_arrow_back"
-                        android:drawableTint="@color/grey_3"
-                        android:gravity="center"
-                        android:text="ESPALDA"
-                        android:textColor="@color/grey_3" />
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/ic_arrow_back"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/spacing_middle"/>
+
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnUploadProducts"
@@ -262,11 +258,7 @@
                             android:layout_centerInParent="true"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -286,6 +278,32 @@
                                 android:textColor="@color/grey_40" />
 
                         </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/rlProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:padding="8dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone">
+
+                            <ProgressBar
+                                android:id="@+id/pbLoading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true" />
+
+                            <TextView
+                                android:id="@+id/tvProgress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/pbLoading"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/uploading_products" />
+
+                        </RelativeLayout>
+
 
                     </RelativeLayout>
 
@@ -302,35 +320,6 @@
         </LinearLayout>
 
     </ScrollView>
-        <RelativeLayout
-            android:id="@+id/rlProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:padding="8dp"
-            android:translationZ="8dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ProgressBar
-                android:id="@+id/pbLoading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" />
-
-            <TextView
-                android:id="@+id/tvProgress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/pbLoading"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="@string/uploading_products" />
-
-        </RelativeLayout>
 
 
 

@@ -107,6 +107,7 @@ public class CountActivity extends AppCompatActivity {
         util.showView(b.rlProgress, true);
         if (isFinishesLoadingProducts) {
             if (productList.size() > 0) {
+
                 int count = 0;
                 int total = productList.size();
                 for (CountedProduct countedProduct : productList) {
@@ -124,7 +125,6 @@ public class CountActivity extends AppCompatActivity {
                                             appExecutors.diskIO().execute(() -> {
                                                 appDatabase.countedProductDao().setProductIsUploaded(1, countedProduct.getProduct_id());
                                             });
-
                                         } else {
                                             Log.e(TAG, "onResponse: failed to upload product " + countedProduct.getProduct_id());
                                         }
@@ -139,9 +139,14 @@ public class CountActivity extends AppCompatActivity {
                                 }
                             });
                 }
-
                 util.hideView(b.rlProgress, true);
                 Toast.makeText(this, "Productos subidos correctamente", Toast.LENGTH_SHORT).show();
+//                if(!anyError){
+//                    Toast.makeText(this, "Productos subidos correctamente"+anyError, Toast.LENGTH_SHORT).show();
+//                }else{
+//                    Toast.makeText(this, "Please try again later"+anyError, Toast.LENGTH_SHORT).show();
+//                }
+
             }
         }
     }

@@ -142,6 +142,16 @@ public class QRCodeScannerActivity extends AppCompatActivity implements ZXingSca
                 RequestPermission();
             }
 
+        }else{
+            if (mScannerView == null) {
+
+                mScannerView = new ZXingScannerView(this);
+                setContentView(mScannerView);
+
+            }
+            mScannerView.setResultHandler(this);
+            mScannerView.startCamera();
+            mScannerView.resumeCameraPreview(this);
         }
     }
 
