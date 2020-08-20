@@ -31,10 +31,10 @@ public class QRCodeScannerActivity extends AppCompatActivity implements ZXingSca
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);
         setContentView(mScannerView);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (CheckPermission()) {
 
-//                Toast.makeText( QRCodeScanner.this,"Permision granted",Toast.LENGTH_LONG ).show();
+//                Toast.makeText( QRCodeScannerActivity.this,"Permiso concedido",Toast.LENGTH_LONG ).show();
             } else {
 
                 RequestPermission();
@@ -83,15 +83,15 @@ public class QRCodeScannerActivity extends AppCompatActivity implements ZXingSca
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     if (cameraAccepted) {
 
-                        Toast.makeText(QRCodeScannerActivity.this, "Permission granted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(QRCodeScannerActivity.this, "Permiso concedido", Toast.LENGTH_LONG).show();
                     } else {
 
-                        Toast.makeText(QRCodeScannerActivity.this, "Permission denied", Toast.LENGTH_LONG).show();
+                        Toast.makeText(QRCodeScannerActivity.this, "Permiso denegado", Toast.LENGTH_LONG).show();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
                             if (shouldShowRequestPermissionRationale(CAMERA)) {
 
-                                DisplayAlertMessage("You need to allow permissions",
+                                DisplayAlertMessage("Necesitas permitir permisos",
                                         new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -116,15 +116,15 @@ public class QRCodeScannerActivity extends AppCompatActivity implements ZXingSca
 
         new AlertDialog.Builder(QRCodeScannerActivity.this)
                 .setMessage(message)
-                .setPositiveButton("OK", listener)
-                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Okay", listener)
+                .setNegativeButton("Cancelar", null)
                 .create().show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (CheckPermission()) {
 
                 if (mScannerView == null) {

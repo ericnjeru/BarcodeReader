@@ -36,7 +36,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_settings" />
+                        app:srcCompat="@drawable/ic_settings" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_count" />
+                        app:srcCompat="@drawable/ic_count" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_consult" />
+                        app:srcCompat="@drawable/ic_consult" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_qrmode" />
+                        app:srcCompat="@drawable/ic_qrmode" />
 
                     <TextView
                         android:layout_width="match_parent"

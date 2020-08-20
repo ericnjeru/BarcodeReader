@@ -91,7 +91,7 @@ public class CountActivity extends AppCompatActivity {
             if (connectivityManager.isOnline()) {
                 uploadProducts();
             } else {
-                Snackbar.make(b.appbar, "No Internet Connection", BaseTransientBottomBar.LENGTH_LONG).show();
+                Snackbar.make(b.appbar, "Sin conexión a Internet", BaseTransientBottomBar.LENGTH_LONG).show();
             }
         });
 
@@ -100,7 +100,7 @@ public class CountActivity extends AppCompatActivity {
     private void uploadProducts() {
 
         if (productList.size() == 0) {
-            Toast.makeText(this, "No counted products", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Productos no contados", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -111,7 +111,7 @@ public class CountActivity extends AppCompatActivity {
                 int total = productList.size();
                 for (CountedProduct countedProduct : productList) {
                     count++;
-                    b.tvProgress.setText("Uploading product " + count + "/" + total);
+                    b.tvProgress.setText("Subiendo producto " + count + "/" + total);
 
                     service.saveSingleProduct(countedProduct)
                             .enqueue(new Callback<SingleCountedProductResponse>() {
@@ -141,7 +141,7 @@ public class CountActivity extends AppCompatActivity {
                 }
 
                 util.hideView(b.rlProgress, true);
-                Toast.makeText(this, "Products uploaded successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Productos subidos correctamente", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -183,8 +183,8 @@ public class CountActivity extends AppCompatActivity {
                         findOrFail(product1);
                         b.scanResult.setText(data.getStringExtra(EXTRA_ADDRESS));
                     } else {
-                        Toast.makeText(CountActivity.this, "Product Not found!", Toast.LENGTH_LONG).show();
-                        b.scanResult.setText("Product Not found!");
+                        Toast.makeText(CountActivity.this, "Producto no encontrado.", Toast.LENGTH_LONG).show();
+                        b.scanResult.setText("Producto no encontrado.");
                     }
 
                 } catch (Exception ex) {

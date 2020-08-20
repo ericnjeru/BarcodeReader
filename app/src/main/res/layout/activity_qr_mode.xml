@@ -36,7 +36,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="BACK"
+                    android:text="ESPALDA"
                     android:drawableStart="@drawable/ic_arrow_back"
                     android:textColor="@color/grey_3"
                     android:drawableLeft="@drawable/ic_arrow_back"
@@ -87,7 +87,7 @@
                     android:layout_marginLeft="@dimen/spacing_large"
                     android:layout_marginRight="@dimen/spacing_large"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/qrscan" />
+                    app:srcCompat="@drawable/qrscan" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/scan"

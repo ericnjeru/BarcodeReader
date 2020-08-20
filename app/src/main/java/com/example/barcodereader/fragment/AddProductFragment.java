@@ -81,7 +81,7 @@ public class AddProductFragment extends BottomSheetDialogFragment {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 String keyword = b.etSearch.getText().toString().trim();
                 if (TextUtils.isEmpty(keyword)) {
-                    Toast.makeText(getContext(), "Please enter a search keyword", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Por favor, introduzca una palabra clave de búsqueda", Toast.LENGTH_SHORT).show();
                 } else {
                     keyword = "%" + keyword + "%";
                     performSearch(keyword);

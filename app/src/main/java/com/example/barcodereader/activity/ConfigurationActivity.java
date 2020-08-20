@@ -1,6 +1,7 @@
 package com.example.barcodereader.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -51,12 +52,18 @@ public class ConfigurationActivity extends AppCompatActivity {
             if (connectivityManager.isOnline()) {
                 downloadOnlineProducts();
             } else {
-                Snackbar.make(b.appbar, "No Internet Connection", BaseTransientBottomBar.LENGTH_LONG).show();
+                Snackbar.make(b.appbar, "Sin conexión a Internet", BaseTransientBottomBar.LENGTH_LONG).show();
             }
 
         });
         b.backBtn.setOnClickListener(v -> {
             onBackPressed();
+        });
+        b.save.setOnClickListener(v -> {
+            if (validateInputs()){
+                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
     }
@@ -70,7 +77,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                     if (!response.body().getError()) {
                         Log.e(TAG, "onResponse: Products downloaded");
 
-                        Toast.makeText(ConfigurationActivity.this, "Downloaded products", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ConfigurationActivity.this, "Productos descargados", Toast.LENGTH_SHORT).show();
 
                         List<Product> productList = new ArrayList<>(response.body().getProducts());
 
@@ -82,7 +89,7 @@ public class ConfigurationActivity extends AppCompatActivity {
                     }
                 } else {
                     util.hideView(b.rlProgress, true);
-                    Toast.makeText(ConfigurationActivity.this, "Unsuccessful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfigurationActivity.this, "Se produjo un error", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -90,6 +97,7 @@ public class ConfigurationActivity extends AppCompatActivity {
             public void onFailure(Call<ProductResponse> call, Throwable t) {
                 util.hideView(b.rlProgress, true);
                 Log.e(TAG, "onFailure: Fatal " + t.getLocalizedMessage());
+                Toast.makeText(ConfigurationActivity.this, "Inténtalo de nuevo.!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -104,15 +112,39 @@ public class ConfigurationActivity extends AppCompatActivity {
                 Log.e(TAG, "writeToRoom: add product " + p.getId());
                 progress++;
                 runOnUiThread(() -> {
-                    b.tvProgress.setText("Saving products... " + progress + "/" + listSize);
+                    b.tvProgress.setText("Guardando productos ... " + progress + "/" + listSize);
                 });
                 appDatabase.productDao().addProduct(p);
             }
 
             runOnUiThread(() -> {
                 util.hideView(b.rlProgress, true);
-                Toast.makeText(ConfigurationActivity.this, "Operation completed successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ConfigurationActivity.this, "La operación se realizó con éxito.", Toast.LENGTH_SHORT).show();
             });
         });
+    }
+
+    private Boolean validateInputs(){
+        String userID = b.uuid.getText().toString().trim();
+        String ip_source = b.ipSource.getText().toString().trim();
+        String ip_destination = b.ipDestination.getText().toString().trim();
+        String password = b.password.getText().toString().trim();
+        if (TextUtils.isEmpty(userID)) {
+            b.uuid.setError("required *");
+            b.uuid.requestFocus();
+            return  false;
+        } else if(TextUtils.isEmpty(ip_source)) {
+            b.ipSource.setError("required *");
+            b.ipSource.requestFocus();
+            return  false;
+        }else if(TextUtils.isEmpty(ip_destination)) {
+            b.ipDestination.setError("required *");
+            b.ipDestination.requestFocus();
+            return  false;
+        }else if(TextUtils.isEmpty(password)) {
+            b.password.setError("required *");
+            b.password.requestFocus();
+             return  false;
+        }else {return  true;}
     }
 }

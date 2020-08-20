@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
         tools:context=".activity.ConfigurationActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -41,10 +43,11 @@
                         android:drawableStart="@drawable/ic_arrow_back"
                         android:drawableTint="@color/grey_3"
                         android:gravity="center"
-                        android:text="BACK"
+                        android:text="ESPALDA"
                         android:textColor="@color/grey_3" />
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/save"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@+id/download"
@@ -65,158 +68,186 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <LinearLayout
-            android:id="@+id/main"
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_below="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/appbar">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:id="@+id/main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_marginRight="@dimen/spacing_middle"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:visibility="visible"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp">
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:paddingBottom="@dimen/spacing_large"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:visibility="visible"
+                    style="@style/CardView.Light"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/spacing_large"
-                        android:text="Id. Usuario:"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-                    <EditText
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/uuid"
-                        android:hint="233423"
-                        android:inputType="number"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_large"
+                            android:text="Id. Usuario:"
+                            android:textColor="@color/grey_100_"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                        <EditText
+                            android:id="@+id/uuid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_large"
+                            android:layout_marginRight="@dimen/spacing_large"
+                            android:hint="233423"
+                            android:textColorHint="@color/grey_20"
+                            android:textColor="@color/grey_80"
+                            android:inputType="number" />
 
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_marginRight="@dimen/spacing_middle"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:visibility="visible"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp">
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:visibility="visible"
+                    style="@style/CardView.Light"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/spacing_large"
-                        android:text="IP. Address Source:"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-                    <EditText
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/ip_source"
-                        android:hint="192.163.43.79"
-                        android:inputType="number"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"/>
+                        android:orientation="vertical">
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_large"
+                            android:text="IP. Address Source:"
+                            android:textColor="@color/grey_100_"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_marginRight="@dimen/spacing_middle"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:visibility="visible"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp">
+                        <EditText
+                            android:id="@+id/ip_source"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_large"
+                            android:layout_marginRight="@dimen/spacing_large"
+                            android:hint="192.163.43.79"
+                            android:textColorHint="@color/grey_20"
+                            android:textColor="@color/grey_80"
+                            android:inputType="number" />
 
-                <LinearLayout
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:visibility="visible"
+                    style="@style/CardView.Light"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/spacing_large"
-                        android:text="IP. Address Destination"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-                    <EditText
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/ip_destination"
-                        android:hint="220.155.42.1"
-                        android:inputType="number"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_large"
+                            android:text="IP. Address Destination"
+                            android:textColor="@color/grey_100_"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                        <EditText
+                            android:id="@+id/ip_destination"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_large"
+                            android:layout_marginRight="@dimen/spacing_large"
+                            android:hint="220.155.42.1"
+                            android:textColorHint="@color/grey_20"
+                            android:textColor="@color/grey_80"
+                            android:inputType="number" />
 
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_marginRight="@dimen/spacing_middle"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:visibility="visible"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp">
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="@dimen/spacing_middle"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:visibility="visible"
+                    style="@style/CardView.Light"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/spacing_large"
-                        android:text="Password"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-                    <EditText
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/password"
-                        android:hint="passoword"
-                        android:inputType="textPassword"
-                        android:layout_marginLeft="@dimen/spacing_large"
-                        android:layout_marginRight="@dimen/spacing_large"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_large"
+                            android:text="Password"
+                            android:textColor="@color/grey_100_"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                        <EditText
+                            android:id="@+id/password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_large"
+                            android:layout_marginRight="@dimen/spacing_large"
+                            android:hint="passoword"
+                            android:textColorHint="@color/grey_20"
+                            android:textColor="@color/grey_80"
+                            android:inputType="textPassword" />
 
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-        </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
 
         <RelativeLayout
             android:id="@+id/rlProgress"
@@ -226,10 +257,7 @@
             android:translationZ="8dp"
             android:padding="8dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_centerInParent="true">
 
             <ProgressBar
                 android:layout_width="wrap_content"
@@ -244,9 +272,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_centerHorizontal="true"
                 android:text="@string/downloading_products"
+                android:textColor="@color/grey_80"
                 android:layout_height="wrap_content" />
 
         </RelativeLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

@@ -44,14 +44,14 @@ public class ConsultActivity extends AppCompatActivity {
 
         b.btnSave.setOnClickListener(v -> {
             if (total < 0) {
-                Toast.makeText(this, "Total is less than 0", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "El total es menor que 0", Toast.LENGTH_SHORT).show();
             } else {
 
                 product.setCountedQuantity(total);
                 appExecutors.diskIO().execute(() -> {
                     appDatabase.countedProductDao().updateSingleProducs(total, product.getProduct_id());
                     runOnUiThread(() -> {
-                        Toast.makeText(this, "Product updated", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Producto actualizado", Toast.LENGTH_SHORT).show();
                         onBackPressed();
                     });
 

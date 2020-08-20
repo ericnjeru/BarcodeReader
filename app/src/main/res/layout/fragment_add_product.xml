@@ -45,7 +45,7 @@
                         android:layout_toEndOf="@id/bt_back"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:hint="Search"
+                        android:hint="Buscar"
                         android:imeOptions="actionSearch"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -90,7 +90,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No result"
+                    android:text="Sin resultados"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
                     android:textColor="@color/grey_40"
                     android:textStyle="bold" />
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:gravity="center"
-                    android:text="Try another keyword"
+                    android:text="Prueba con otra palabra clave"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@color/grey_40" />
 

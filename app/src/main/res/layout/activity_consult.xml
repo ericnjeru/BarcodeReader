@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         tools:context=".activity.ConsultActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -42,7 +43,7 @@
                         android:drawableLeft="@drawable/ic_arrow_back"
                         android:drawableTint="@color/grey_3"
                         android:gravity="center"
-                        android:text="BACK"
+                        android:text="ESPALDA"
                         android:textColor="@color/grey_3" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -78,6 +79,7 @@
                 android:layout_marginRight="@dimen/spacing_middle"
                 android:layout_marginBottom="@dimen/spacing_medium"
                 android:visibility="visible"
+                style="@style/CardView.Light"
                 app:cardCornerRadius="2dp"
                 app:cardElevation="2dp">
 
@@ -94,7 +96,7 @@
                         android:layout_marginRight="@dimen/spacing_large"
                         android:layout_marginBottom="@dimen/spacing_large"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/grey_60"
+                        android:textColor="@color/grey_100_"
                         tools:text="Cocacola, light, bottle glass,250ml," />
 
                 </LinearLayout>
@@ -109,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:cardCornerRadius="2dp"
+                style="@style/CardView.Light"
                 app:cardElevation="2dp"
                 app:cardUseCompatPadding="true">
 
@@ -132,7 +135,7 @@
                             android:gravity="center_vertical"
                             android:text="Summary"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_80"
+                            android:textColor="@color/grey_100_"
                             app:fontFamily="sans-serif-medium" />
 
 
@@ -165,7 +168,7 @@
                             android:layout_weight="1"
                             android:text="Contado"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_80"
+                            android:textColor="@color/grey_100_"
                             app:fontFamily="sans-serif-medium" />
 
                         <TextView
@@ -196,7 +199,7 @@
                             android:layout_weight="1"
                             android:text="Restar"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_80"
+                            android:textColor="@color/grey_100_"
                             app:fontFamily="sans-serif-medium" />
 
                         <EditText
@@ -204,7 +207,9 @@
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal"
-                            android:inputType="number" />
+                            android:inputType="number"
+                            android:textColor="@color/grey_100_"
+                            android:textColorHint="@color/grey_40"/>
 
                     </LinearLayout>
 
@@ -226,7 +231,7 @@
                             android:layout_weight="1"
                             android:text="Sumar"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_80"
+                            android:textColor="@color/grey_100_"
                             app:fontFamily="sans-serif-medium" />
 
 
@@ -235,7 +240,9 @@
                             android:layout_width="80dp"
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal"
-                            android:inputType="number" />
+                            android:inputType="number"
+                            android:textColor="@color/grey_100_"
+                            android:textColorHint="@color/grey_40" />
 
 
                     </LinearLayout>
@@ -255,7 +262,7 @@
                             android:gravity="center_vertical"
                             android:text="Nuevo Total:"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_80"
+                            android:textColor="@color/grey_100_"
                             app:fontFamily="sans-serif-medium" />
 
                         <TextView
@@ -278,7 +285,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="grabar" />
+                        android:text="grabar"
+                        android:textColor="@color/colorWhite"/>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
