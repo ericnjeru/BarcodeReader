@@ -19,10 +19,10 @@ public interface ProductDao {
     @Query("SELECT * FROM products")
     LiveData<List<Product>> getAllProducts();
 
-    @Query("SELECT * FROM products WHERE product LIKE :keyword")
+    @Query("SELECT * FROM products WHERE producto LIKE :keyword ORDER BY producto ASC")
     LiveData<List<Product>> findProduct(String keyword);
 
-    @Query("SELECT * FROM products WHERE barCode=:barcode")
+    @Query("SELECT * FROM products WHERE codBarra=:barcode")
     Product getProductByBarCode(String barcode);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

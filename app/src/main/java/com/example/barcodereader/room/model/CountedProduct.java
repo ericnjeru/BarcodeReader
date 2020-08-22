@@ -27,12 +27,12 @@ public class CountedProduct implements Serializable {
     private String identificationCard;
     @SerializedName("business")
     @Expose
-    private String business;
+    private Integer business;
     @SerializedName("branch_office")
     @Expose
-    private String branchOffice;
+    private Integer branchOffice;
 
-    private int product_id;
+    private String product_id;
 
     private int uploaded = 0;
 
@@ -72,23 +72,23 @@ public class CountedProduct implements Serializable {
         this.identificationCard = identificationCard;
     }
 
-    public String getBusiness() {
+    public Integer getBusiness() {
         return business;
     }
 
-    public void setBusiness(String business) {
+    public void setBusiness(Integer business) {
         this.business = business;
     }
 
-    public String getBranchOffice() {
+    public Integer getBranchOffice() {
         return branchOffice;
     }
 
-    public void setBranchOffice(String branchOffice) {
+    public void setBranchOffice(Integer branchOffice) {
         this.branchOffice = branchOffice;
     }
 
-    public int getProduct_id() {
+    public String getProduct_id() {
         return product_id;
     }
 
@@ -100,7 +100,7 @@ public class CountedProduct implements Serializable {
         this.uploaded = uploaded;
     }
 
-    public void setProduct_id(int product_id) {
+    public void setProduct_id(String product_id) {
         this.product_id = product_id;
     }
 

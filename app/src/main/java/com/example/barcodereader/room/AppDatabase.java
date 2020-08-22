@@ -14,7 +14,7 @@ import com.example.barcodereader.room.model.Product;
 import com.example.barcodereader.room.model.User;
 
 /*Add all entities here*/
-@Database(entities = {User.class, Product.class, CountedProduct.class}, exportSchema = false, version = 4)
+@Database(entities = {User.class, Product.class, CountedProduct.class}, exportSchema = false, version = 10)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

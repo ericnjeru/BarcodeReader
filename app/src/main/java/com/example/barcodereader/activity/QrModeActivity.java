@@ -86,11 +86,11 @@ public class QrModeActivity extends AppCompatActivity {
 
             if (countedProduct == null) {
                 countedProduct = new CountedProduct();
-                countedProduct.setProduct(p.getProduct());
+                countedProduct.setProduct(p.getProducto());
                 countedProduct.setCountedQuantity(0);
                 countedProduct.setIdentificationCard("");
-                countedProduct.setBusiness("");
-                countedProduct.setBranchOffice("");
+                countedProduct.setBusiness(0);
+                countedProduct.setBranchOffice(0);
                 appDatabase.countedProductDao().addProduct(countedProduct);
             }
 

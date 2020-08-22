@@ -20,8 +20,10 @@ import com.example.barcodereader.retrofit.response.SingleCountedProductResponse;
 import com.example.barcodereader.room.AppDatabase;
 import com.example.barcodereader.room.model.CountedProduct;
 import com.example.barcodereader.room.model.Product;
+import com.example.barcodereader.room.model.User;
 import com.example.barcodereader.util.AppExecutors;
 import com.example.barcodereader.util.MyConnectivityManager;
+import com.example.barcodereader.util.SharedPrefsManager;
 import com.example.barcodereader.util.util;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -48,6 +50,8 @@ public class CountActivity extends AppCompatActivity {
     private ApiService service;
     private MyConnectivityManager connectivityManager;
     private Product searchproduct = null;
+    private User currentUser;
+    private SharedPrefsManager sharedPrefsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,17 @@ public class CountActivity extends AppCompatActivity {
         appExecutors = AppExecutors.getInstance();
         service = util.getApiService();
         connectivityManager = MyConnectivityManager.getInstance(this);
+        sharedPrefsManager = SharedPrefsManager.getInstance(this);
+
+
+        appDatabase.userDao().getCurrentUser().observe(this, user -> {
+            if (user == null) {
+                currentUser = sharedPrefsManager.getCurrentUser();
+            }
+
+            currentUser = user;
+
+        });
 
         b.btnSearch.setOnClickListener(v -> showAddProductDialog());
 
@@ -105,6 +120,13 @@ public class CountActivity extends AppCompatActivity {
         }
 
         util.showView(b.rlProgress, true);
+        if (currentUser == null) {
+            Toast.makeText(this, "Need to save user data", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(new Intent(CountActivity.this, ConfigurationActivity.class));
+            intent.putExtra("login", "login");
+            startActivityForResult(intent, 101);
+            return;
+        }
         if (isFinishesLoadingProducts) {
             if (productList.size() > 0) {
 
@@ -114,7 +136,9 @@ public class CountActivity extends AppCompatActivity {
                     count++;
                     b.tvProgress.setText("Subiendo producto " + count + "/" + total);
 
-                    service.saveSingleProduct(countedProduct)
+                    service.saveSingleProduct(1, currentUser.getId(), currentUser.getIp_address_destination(), currentUser.getIp_address_source(), currentUser.getPassword(),
+                            countedProduct.getProduct(), countedProduct.getCountedQuantity(),
+                            countedProduct.getIdentificationCard(), countedProduct.getBusiness(), countedProduct.getBranchOffice())
                             .enqueue(new Callback<SingleCountedProductResponse>() {
                                 @Override
                                 public void onResponse(Call<SingleCountedProductResponse> call, Response<SingleCountedProductResponse> response) {
@@ -140,7 +164,7 @@ public class CountActivity extends AppCompatActivity {
                             });
                 }
                 util.hideView(b.rlProgress, true);
-                Toast.makeText(this, "Productos subidos correctamente", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Productos subidos correctamente", Toast.LENGTH_SHORT).show();
 //                if(!anyError){
 //                    Toast.makeText(this, "Productos subidos correctamente"+anyError, Toast.LENGTH_SHORT).show();
 //                }else{
@@ -218,11 +242,11 @@ public class CountActivity extends AppCompatActivity {
 
             if (countedProduct == null) {
                 countedProduct = new CountedProduct();
-                countedProduct.setProduct(p.getProduct());
+                countedProduct.setProduct(p.getProducto());
                 countedProduct.setCountedQuantity(0);
                 countedProduct.setIdentificationCard("");
-                countedProduct.setBusiness("");
-                countedProduct.setBranchOffice("");
+                countedProduct.setBusiness(0);
+                countedProduct.setBranchOffice(0);
                 appDatabase.countedProductDao().addProduct(countedProduct);
             }
 

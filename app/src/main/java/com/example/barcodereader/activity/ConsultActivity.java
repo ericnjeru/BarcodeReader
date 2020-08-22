@@ -49,7 +49,7 @@ public class ConsultActivity extends AppCompatActivity {
 
                 product.setCountedQuantity(total);
                 appExecutors.diskIO().execute(() -> {
-                    appDatabase.countedProductDao().updateSingleProducs(total, product.getProduct_id());
+                    appDatabase.countedProductDao().updateSingleProduct(total, product.getProduct_id());
                     runOnUiThread(() -> {
                         Toast.makeText(this, "Producto actualizado", Toast.LENGTH_SHORT).show();
                         onBackPressed();

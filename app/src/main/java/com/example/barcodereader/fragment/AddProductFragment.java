@@ -120,11 +120,11 @@ public class AddProductFragment extends BottomSheetDialogFragment {
 
             if (countedProduct == null) {
                 countedProduct = new CountedProduct();
-                countedProduct.setProduct(p.getProduct());
+                countedProduct.setProduct(p.getProducto());
                 countedProduct.setCountedQuantity(0);
                 countedProduct.setIdentificationCard("");
-                countedProduct.setBusiness("");
-                countedProduct.setBranchOffice("");
+                countedProduct.setBusiness(0);
+                countedProduct.setBranchOffice(0);
                 countedProduct.setProduct_id(p.getId());
                 appDatabase.countedProductDao().addProduct(countedProduct);
             }

@@ -1,5 +1,6 @@
 package com.example.barcodereader.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,8 +15,10 @@ import com.example.barcodereader.retrofit.ApiService;
 import com.example.barcodereader.retrofit.response.ProductResponse;
 import com.example.barcodereader.room.AppDatabase;
 import com.example.barcodereader.room.model.Product;
+import com.example.barcodereader.room.model.User;
 import com.example.barcodereader.util.AppExecutors;
 import com.example.barcodereader.util.MyConnectivityManager;
+import com.example.barcodereader.util.SharedPrefsManager;
 import com.example.barcodereader.util.util;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -35,7 +38,8 @@ public class ConfigurationActivity extends AppCompatActivity {
     private ApiService service;
     private static final String TAG = "Configuration";
     private MyConnectivityManager connectivityManager;
-
+    private User currentUser;
+    private SharedPrefsManager sharedPrefsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +50,29 @@ public class ConfigurationActivity extends AppCompatActivity {
         appDatabase = AppDatabase.getInstance(this);
         service = util.getApiService();
         connectivityManager = MyConnectivityManager.getInstance(this);
+        sharedPrefsManager = SharedPrefsManager.getInstance(this);
+
+        appDatabase.userDao().getCurrentUser().observe(this, user -> {
+            if (user == null) {
+                user = sharedPrefsManager.getCurrentUser();
+            }
+
+            currentUser = user;
+
+            b.ipSource.setText(user.getIp_address_source());
+            b.ipDestination.setText(user.getIp_address_destination());
+            b.uuid.setText(user.getId());
+            b.password.setText(user.getPassword());
+        });
+
 
         b.download.setOnClickListener(v -> {
 
             if (connectivityManager.isOnline()) {
+                if (currentUser == null) {
+                    Toast.makeText(this, "Need to save user data", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 downloadOnlineProducts();
             } else {
                 Snackbar.make(b.appbar, "Sin conexión a Internet", BaseTransientBottomBar.LENGTH_LONG).show();
@@ -60,27 +83,26 @@ public class ConfigurationActivity extends AppCompatActivity {
             onBackPressed();
         });
         b.save.setOnClickListener(v -> {
-            if (validateInputs()){
-                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
-            }
-
+            validateInputsAndSave();
         });
 
     }
 
     private void downloadOnlineProducts() {
         util.showView(b.rlProgress, true);
-        service.getAllProducts().enqueue(new Callback<ProductResponse>() {
+        service.getAllProducts(1, currentUser.getId(), currentUser.getIp_address_destination(),
+                currentUser.getIp_address_source(), currentUser.getPassword()).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if (response.isSuccessful()) {
                     if (!response.body().getError()) {
-                        Log.e(TAG, "onResponse: Products downloaded");
+                        Log.e(TAG, "onResponse: Products downloaded " + response.body().getProducts().toString());
 
                         Toast.makeText(ConfigurationActivity.this, "Productos descargados", Toast.LENGTH_SHORT).show();
 
                         List<Product> productList = new ArrayList<>(response.body().getProducts());
 
+                        Log.e(TAG, "onResponse: size " + productList.size());
                         writeToRoom(productList);
 
                     } else {
@@ -119,12 +141,13 @@ public class ConfigurationActivity extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 util.hideView(b.rlProgress, true);
+                b.tvProgress.setText("Guardando productos ... " + 0 + "/" + 0);
                 Toast.makeText(ConfigurationActivity.this, "La operación se realizó con éxito.", Toast.LENGTH_SHORT).show();
             });
         });
     }
 
-    private Boolean validateInputs(){
+    private void validateInputsAndSave() {
         String userID = b.uuid.getText().toString().trim();
         String ip_source = b.ipSource.getText().toString().trim();
         String ip_destination = b.ipDestination.getText().toString().trim();
@@ -132,19 +155,36 @@ public class ConfigurationActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(userID)) {
             b.uuid.setError("required *");
             b.uuid.requestFocus();
-            return  false;
-        } else if(TextUtils.isEmpty(ip_source)) {
+        } else if (TextUtils.isEmpty(ip_source)) {
             b.ipSource.setError("required *");
             b.ipSource.requestFocus();
-            return  false;
-        }else if(TextUtils.isEmpty(ip_destination)) {
+        } else if (TextUtils.isEmpty(ip_destination)) {
             b.ipDestination.setError("required *");
             b.ipDestination.requestFocus();
-            return  false;
-        }else if(TextUtils.isEmpty(password)) {
-            b.password.setError("required *");
-            b.password.requestFocus();
-             return  false;
-        }else {return  true;}
+        } else {
+            appExecutors.diskIO().execute(() -> {
+                User user = new User();
+                user.setId(userID);
+                user.setIp_address_source(ip_source);
+                user.setIp_address_destination(ip_destination);
+                user.setPassword(password);
+
+                if (appDatabase.userDao().getCount() > 0) {
+                    appDatabase.userDao().deleteAllUsers();
+                }
+                appDatabase.userDao().saveUser(user);
+
+                sharedPrefsManager.saveUser(user.serialize());
+                runOnUiThread(() -> Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show());
+
+                if (getIntent().getExtras() != null && getIntent().getExtras().getString("login").equals("login")) {
+                    Intent intent = new Intent(ConfigurationActivity.this, CountActivity.class);
+                    intent.putExtra("message", "success");
+                    setResult(101, intent);
+                }
+            });
+        }
+
+
     }
 }

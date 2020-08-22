@@ -1,5 +1,6 @@
 package com.example.barcodereader.room.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -11,128 +12,128 @@ import java.io.Serializable;
 @Entity(tableName = "products")
 public class Product implements Serializable {
 
+    @PrimaryKey()
+    @NonNull
     @SerializedName("id")
     @Expose
-    @PrimaryKey(autoGenerate = true)
-    private Integer id;
+    private String id = "";
 
-    @SerializedName("product")
+    @SerializedName("producto")
     @Expose
-    private String product;
-    @SerializedName("p_cost")
+    private String producto;
+    @SerializedName("p_costo")
     @Expose
-    private Integer pCost;
-    @SerializedName("p_sale")
+    private String pCosto;
+    @SerializedName("p_venta")
     @Expose
-    private Integer pSale;
-    @SerializedName("internal_code")
+    private String pVenta;
+    @SerializedName("cod_interno")
     @Expose
-    private String internalCode;
-    @SerializedName("m_expiration")
+    private String codInterno;
+    @SerializedName("m_vencimiento")
     @Expose
-    private String mExpiration;
-    @SerializedName("bar_code")
+    private String mVencimiento;
+    @SerializedName("a_vencimiento")
     @Expose
-    private String barCode;
-    @SerializedName("stock_client")
+    private String aVencimiento;
+    @SerializedName("cod_barra")
     @Expose
-    private Integer stockClient;
-    @SerializedName("business")
+    private String codBarra;
+    @SerializedName("stock_cliente")
     @Expose
-    private Integer business;
-    @SerializedName("branch_office")
+    private String stockCliente;
+    @SerializedName("empresa")
     @Expose
-    private Integer branchOffice;
-    @SerializedName("updated_at")
+    private String empresa;
+    @SerializedName("sucursal")
     @Expose
-    private String updatedAt;
+    private String sucursal;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getProduct() {
-        return product;
+    public String getProducto() {
+        return producto;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
+    public void setProducto(String producto) {
+        this.producto = producto;
     }
 
-    public Integer getPCost() {
-        return pCost;
+    public String getPCosto() {
+        return pCosto;
     }
 
-    public void setPCost(Integer pCost) {
-        this.pCost = pCost;
+    public void setPCosto(String pCosto) {
+        this.pCosto = pCosto;
     }
 
-    public Integer getPSale() {
-        return pSale;
+    public String getPVenta() {
+        return pVenta;
     }
 
-    public void setPSale(Integer pSale) {
-        this.pSale = pSale;
+    public void setPVenta(String pVenta) {
+        this.pVenta = pVenta;
     }
 
-    public String getInternalCode() {
-        return internalCode;
+    public String getCodInterno() {
+        return codInterno;
     }
 
-    public void setInternalCode(String internalCode) {
-        this.internalCode = internalCode;
+    public void setCodInterno(String codInterno) {
+        this.codInterno = codInterno;
     }
 
-    public String getMExpiration() {
-        return mExpiration;
+    public String getMVencimiento() {
+        return mVencimiento;
     }
 
-    public void setMExpiration(String mExpiration) {
-        this.mExpiration = mExpiration;
+    public void setMVencimiento(String mVencimiento) {
+        this.mVencimiento = mVencimiento;
     }
 
-    public String getBarCode() {
-        return barCode;
+    public String getAVencimiento() {
+        return aVencimiento;
     }
 
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
+    public void setAVencimiento(String aVencimiento) {
+        this.aVencimiento = aVencimiento;
     }
 
-    public Integer getStockClient() {
-        return stockClient;
+    public String getCodBarra() {
+        return codBarra;
     }
 
-    public void setStockClient(Integer stockClient) {
-        this.stockClient = stockClient;
+    public void setCodBarra(String codBarra) {
+        this.codBarra = codBarra;
     }
 
-    public Integer getBusiness() {
-        return business;
+    public String getStockCliente() {
+        return stockCliente;
     }
 
-    public void setBusiness(Integer business) {
-        this.business = business;
+    public void setStockCliente(String stockCliente) {
+        this.stockCliente = stockCliente;
     }
 
-    public Integer getBranchOffice() {
-        return branchOffice;
+    public String getEmpresa() {
+        return empresa;
     }
 
-    public void setBranchOffice(Integer branchOffice) {
-        this.branchOffice = branchOffice;
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getSucursal() {
+        return sucursal;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setSucursal(String sucursal) {
+        this.sucursal = sucursal;
     }
-
 }

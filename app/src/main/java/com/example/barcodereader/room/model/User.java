@@ -1,13 +1,17 @@
 package com.example.barcodereader.room.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.google.gson.Gson;
 
 @Entity(tableName = "users")
 public class User {
 
     @PrimaryKey
-    private int id;
+    @NonNull
+    private String id = "null";
 
     private String ip_address_source;
 
@@ -18,18 +22,18 @@ public class User {
     public User() {
     }
 
-    public User(int id, String ip_address_source, String ip_address_destination, String password) {
+    public User(String id, String ip_address_source, String ip_address_destination, String password) {
         this.id = id;
         this.ip_address_source = ip_address_source;
         this.ip_address_destination = ip_address_destination;
         this.password = password;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -55,5 +59,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String serialize() {
+        return new Gson().toJson(this);
+    }
+
+    public static User create(String fromJson) {
+        return new Gson().fromJson(fromJson, User.class);
     }
 }

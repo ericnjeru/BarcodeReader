@@ -20,7 +20,7 @@ public interface CountedProductDao {
     LiveData<List<CountedProduct>> getAllCountedProducts();
 
     @Query("SELECT * FROM counted_products WHERE product_id=:product_id")
-    CountedProduct findProduct(int product_id);
+    CountedProduct findProduct(String product_id);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addProduct(CountedProduct product);
@@ -32,10 +32,10 @@ public interface CountedProductDao {
     void updateProduct(CountedProduct product);
 
     @Query("UPDATE counted_products SET countedQuantity=:total WHERE product_id=:product_id")
-    void updateSingleProducs(int total, int product_id);
+    void updateSingleProduct(int total, String product_id);
 
 
     @Query("UPDATE counted_products SET uploaded=:is_uploaded WHERE product_id=:product_id")
-    void setProductIsUploaded(int is_uploaded, int product_id);
+    void setProductIsUploaded(int is_uploaded, String product_id);
 
 }
