@@ -17,9 +17,10 @@ import com.example.barcodereader.retrofit.RetrofitClient;
 public class util {
 
     private static final String TAG = "util";
-    //    public static final String BASE_URL = "http://192.168.43.121:8000/api/";
+    //public static final String BASE_URL = "http://192.168.43.121:8000/api/";
     //public static final String BASE_URL = "http://barcodeapi.mati.co.ke/api/";
-    public static final String BASE_URL = "http://192.168.1.175/stock/";
+    //public static final String BASE_URL = "http://192.168.1.175/stock/";
+    public static final String BASE_URL = "http://181.122.84.22/";
 
     /*Instantiate retrofit API client*/
     public static ApiService getApiService() {
